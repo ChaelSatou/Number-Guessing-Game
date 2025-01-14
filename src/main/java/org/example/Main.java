@@ -2,8 +2,10 @@ package org.example;
 
 import java.util.Scanner;
 
+// Author: Chael Candeza
 public class Main {
-    static int[] answer = {30,23,18};
+
+    static int answers = (int)(Math.random() * 100);
     static int attempts;
 
     static Scanner input = new Scanner(System.in);
@@ -38,17 +40,18 @@ public class Main {
         System.out.println("Great! You have selected the Easy difficulty level");
         System.out.println("Let's start the game ");
         attempts = 10;
+        //System.out.println("Random number! "+answers);
         int i = 1;
         while ( i <=attempts ){
             System.out.print("Enter your guess!: ");
             int easyLevelGuess = input.nextInt();
 
-            if (easyLevelGuess < answer[0]){
-                System.out.println("Incorrect! The number is less than "+easyLevelGuess);
+            if (easyLevelGuess < answers){
+                System.out.println("Incorrect! The number is greater than "+easyLevelGuess);
                 i++;
             }
-            else if (easyLevelGuess > answer[0]) {
-                System.out.println("Incorrect! The number is greater than "+easyLevelGuess);
+            else if (easyLevelGuess > answers) {
+                System.out.println("Incorrect! The number is less than "+easyLevelGuess);
                 i++;
             }
             else {
@@ -63,17 +66,19 @@ public class Main {
         System.out.println("Great! You have selected the Medium difficulty level");
         System.out.println("Let's start the game ");
         attempts = 5;
+        //System.out.println("Random number! "+answers);
         int i = 1;
         while ( i <=attempts ){
             System.out.print("Enter your guess!: ");
-            int easyLevelGuess = input.nextInt();
-
-            if (easyLevelGuess < answer[0]){
-                System.out.println("Incorrect! The number is less than "+easyLevelGuess);
+            int mediumLevelGuess = input.nextInt();
+            
+            // I remove the static value for answers and used the math.random
+            if (mediumLevelGuess < answers){
+                System.out.println("Incorrect! The number is greater than "+mediumLevelGuess);
                 i++;
             }
-            else if (easyLevelGuess > answer[0]) {
-                System.out.println("Incorrect! The number is greater than "+easyLevelGuess);
+            else if (mediumLevelGuess > answers) {
+                System.out.println("Incorrect! The number is less than "+mediumLevelGuess);
                 i++;
             }
             else {
@@ -88,24 +93,32 @@ public class Main {
         System.out.println("Great! You have selected the Hard difficulty level");
         System.out.println("Let's start the game ");
         attempts = 3;
+        //System.out.println("Random number! "+answers);
         int i = 1;
         while ( i <=attempts ){
             System.out.print("Enter your guess!: ");
-            int easyLevelGuess = input.nextInt();
+            int hardLevelGuess = input.nextInt();
 
-            if (easyLevelGuess < answer[0]){
-                System.out.println("Incorrect! The number is less than "+easyLevelGuess);
+            if (hardLevelGuess < answers){
+                System.out.println("Incorrect! The number is greater than "+hardLevelGuess);
                 i++;
             }
-            else if (easyLevelGuess > answer[0]) {
-                System.out.println("Incorrect! The number is greater than "+easyLevelGuess);
+
+            else if (hardLevelGuess > answers) {
+                System.out.println("Incorrect! The number is less than "+hardLevelGuess);
                 i++;
             }
+
             else {
                 System.out.println("Congratulations! You guessed the correct number in "+ i +" attempts.");
                 break;
             }
+
+            if (i > attempts){
+                System.out.println("You have out of chances. Thanks for playing!");
+            }
+
         }
-        System.out.println("You have out of chances. Thanks for playing!");
+
     }
 }
