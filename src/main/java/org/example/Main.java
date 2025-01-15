@@ -1,5 +1,8 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Author: Chael Candeza
@@ -7,6 +10,7 @@ public class Main {
 
     static int answers = (int)(Math.random() * 100);
     static int attempts;
+    static int highScore = readHighScore();
 
     static Scanner input = new Scanner(System.in);
 
@@ -34,7 +38,7 @@ public class Main {
             default:
                 System.out.println("Invalid choice try again!");
         }
-
+        input.close();
     }
     public static void easyLevel(){
         System.out.println("Great! You have selected the Easy difficulty level");
@@ -56,10 +60,17 @@ public class Main {
             }
             else {
                 System.out.println("Congratulations! You guessed the correct number in "+ i +" attempts.");
+                if (i < highScore || highScore == -1 ){
+                    System.out.println("New High Score!");
+                    writeHighScores(i);
+                }
                 break;
             }
+            if (i > attempts){
+                System.out.println("You have out of chances. Thanks for playing!");
+            }
         }
-        System.out.println("You have out of chances. Thanks for playing!");
+
     }
 
     public static void mediumLevel(){
@@ -85,8 +96,11 @@ public class Main {
                 System.out.println("Congratulations! You guessed the correct number in "+ i +" attempts.");
                 break;
             }
+            if (i > attempts){
+                System.out.println("You have out of chances. Thanks for playing!");
+            }
         }
-        System.out.println("You have out of chances. Thanks for playing!");
+
     }
 
     public static void hardLevel(){
@@ -120,5 +134,36 @@ public class Main {
 
         }
 
+    }
+
+    public static int readHighScore(){
+        try{
+            File file = new File("highscore.txt");
+            if (file.exists()){
+                Scanner fileReader = new Scanner(file);
+                if (fileReader.hasNextInt()){
+                    return fileReader.nextInt();
+                }
+                fileReader.close();
+            }
+        }
+        catch (IOException e) {
+            System.out.println("Error on reading the high scores.");
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static void writeHighScores (int score){
+        try {
+            FileWriter fileWriter = new FileWriter("highscore.txt");
+            fileWriter.write(Integer.toString(score));
+            fileWriter.close();
+        }
+        catch (IOException e){
+            System.out.println("Error on writing the highscore.");
+            e.printStackTrace();
+
+        }
     }
 }
